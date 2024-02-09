@@ -1,7 +1,7 @@
 import streamlit as st 
-from cv2 import cv2 
 import numpy as np 
 import plotly.express as px 
+from PIL import Image
 
 st.set_page_config(page_title='Image')
 st.title("RGB Calculator")
@@ -15,15 +15,16 @@ image_option = st.selectbox(
 
 if image_option == "Take a snap":
     ins_im = st.camera_input('Take a image to proceed...')
-    if ins_im:
-        bytes_data = ins_im.getvalue()
-        image = cv2.imdecode(np.frombuffer(bytes_data, np.uint8), cv2.IMREAD_COLOR)
+    if ins_im:    
+        img = Image.open(ins_im)
+        image = np.array(img)
         fig = px.imshow(image)
         st.plotly_chart(fig)
 elif  image_option == "Upload an existing image":
     upl_image = st.file_uploader("Upload a image in png, jpg, jpeg format ", type=['png', 'jpg', 'jpeg'],accept_multiple_files=False)
     if upl_image:
-        image = cv2.imdecode(np.fromstring(upl_image.read(), np.uint8), cv2.IMREAD_COLOR)
+        img = Image.open(upl_image)
+        image = np.array(img)
         fig = px.imshow(image)
         st.plotly_chart(fig)
 
