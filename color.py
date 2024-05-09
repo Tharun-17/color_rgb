@@ -41,23 +41,23 @@ elif  image_option == "Upload an existing image":
         st.plotly_chart(fig)
 
 proceed = st.button('Proceed to predict')
-#if proceed:
-
-data = pd.read_csv('colors.csv')
-
-x = data[['R','G','B']]
-y = data[['color_name','hex']]
-
-knn_model = KNeighborsClassifier(n_neighbors = 3)
-knn_model.fit(x,y)
-
-r = st.number_input('Enter the Red value',max_value = 255)
-g = st.number_input('Enter the Green value',max_value = 255)
-b = st.number_input('Enter the Blue value',max_value = 255)
-
-pred = knn_model.predict([[r,g,b]])
-st.write(pred)
-display_color_box([r,g,b])
+if proceed:
+    
+    data = pd.read_csv('colors.csv')
+    
+    x = data[['R','G','B']]
+    y = data[['color_name','hex']]
+    
+    knn_model = KNeighborsClassifier(n_neighbors = 3)
+    knn_model.fit(x,y)
+    
+    r = st.number_input('Enter the Red value',max_value = 255)
+    g = st.number_input('Enter the Green value',max_value = 255)
+    b = st.number_input('Enter the Blue value',max_value = 255)
+    
+    pred = knn_model.predict([[r,g,b]])
+    st.write(pred)
+    display_color_box([r,g,b])
 
 
 # st.write(uploaded_files)
