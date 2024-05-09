@@ -47,6 +47,7 @@ requests==2.31.0
 rich==13.3.5
 rpds-py==0.10.6
 ruamel.yaml==0.17.21
+scikit-learn==1.4.0
 setuptools==68.2.2
 six==1.16.0
 smmap==4.0.0
